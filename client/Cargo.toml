@@ -1,0 +1,12 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+solana-sdk = "^1.8.1"
+solana-cli-config = "^1.8.1"
+solana-client = "^1.8.1"
+ark-ec = { version = "0.3.0", default-features = false}
+ark-bn254 = { version = "0.3.0", features = ["curve"]}
+circuit = { version = "0.1.0", path = "../circuit"}
