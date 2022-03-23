@@ -1,6 +1,6 @@
 # Groth16 verifier on Solana
 
-This project is an Implementation of the Groth16 zk-SNARK proving system on Solana.
+This project is an implementation of the Groth16 zk-SNARK proving system on Solana.
 
 The project comprises of:
 
