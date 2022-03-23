@@ -2,7 +2,7 @@
 
 This project is an implementation of the Groth16 zk-SNARK proving system on Solana.
 
-The project comprises of:
+The project is consist of:
 
 - An on-chain proof verifier program
 - A circuit demo
@@ -10,7 +10,7 @@ The project comprises of:
 
 ## Quick Start
 
-The following dependencies are required to build and run this example, depending on your OS, they may already be installed:
+The following dependencies are required to build and run this example, depending on your OS, they my have already been installed:
 
 - Install Rust v1.56.1 or later from https://rustup.rs/
 
