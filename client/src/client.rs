@@ -16,9 +16,9 @@ use solana_sdk::transaction::Transaction;
 use circuit::initialize;
 
 const CONTRACT_SO_PATH: &str =
-    "/mnt/e/Programs/zklink/groth16-sol-verifier/target/deploy/contract.so";
+    "/Users/mauriciobarba/repos/zkops/circommul/rust_verifier/solana/groth16-sol-verifier/target/deploy/contract.so";
 const CONTRACT_KEYPAIR_PATH: &str =
-    "/mnt/e/Programs/zklink/groth16-sol-verifier/target/deploy/contract-keypair.json";
+    "/Users/mauriciobarba/repos/zkops/circommul/rust_verifier/solana/groth16-sol-verifier/target/deploy/contract-keypair.json";
 const SIZE: usize = 384;
 
 pub struct Client {
@@ -125,7 +125,7 @@ impl Client {
                 SIZE as u64,
                 &self.program_id,
             );
-            let (recent_hash, _) = self.connection.get_recent_blockhash().unwrap();
+            let recent_hash = self.connection.get_latest_blockhash().unwrap();
             let transaction = Transaction::new_signed_with_payer(
                 &[intruction],
                 Some(&self.payer.pubkey()),
@@ -276,7 +276,6 @@ impl Client {
         // run a circuit demo
         let (proof_c, prepared_input, qap) = initialize().unwrap();
         println!("run a circuit demo, get input and proof");
-
         // create accounts for verify
         let mut keys = vec![];
         keys.push(self.check_account("gamma"));
@@ -301,10 +300,11 @@ impl Client {
             .iter()
             .map(|key| AccountMeta::new(*key, false))
             .collect();
-        let (recent_hash, _) = self.connection.get_recent_blockhash().unwrap();
+        let recent_hash = self.connection.get_latest_blockhash().unwrap();
 
-        let i1 = solana_sdk::compute_budget::request_units(1_000_000 as u32);
-
+        let i1 = solana_sdk::compute_budget::ComputeBudgetInstruction::set_compute_unit_limit(1_000_000 as u32);
+        println!("{:?}", accounts);
+        println!("{:?}", data.as_slice());
         let i2 = solana_sdk::instruction::Instruction::new_with_bytes(
             self.program_id,
             data.as_slice(),
